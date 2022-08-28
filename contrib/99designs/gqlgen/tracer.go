@@ -87,6 +87,7 @@ func (t *gqlTracer) InterceptResponse(ctx context.Context, next graphql.Response
 		}
 		if octx.RawQuery != "" {
 			opts = append(opts, tracer.ResourceName(octx.RawQuery))
+			opts = append(opts, tracer.Tag(ext.SQLQuery, octx.RawQuery))
 		}
 		opts = append(opts, tracer.StartTime(octx.Stats.OperationStart))
 	}
